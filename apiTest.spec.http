@@ -1,0 +1,81 @@
+### install "Rest Client" in VS Code to use this file
+
+### start the service:
+### "npm start" or "npm start 9999" where 9999 is the port, if port is not specified the default is 8080
+
+### Get help
+GET http://localhost:9999/
+
+
+### STEP 1: set up credential, where the api body is the credential
+### you can go to https://developers.google.com/gmail/api/quickstart/nodejs to enable and download the credentail
+POST http://localhost:9999/setup/credential
+content-type: application/json
+
+{
+  "installed": {
+    "client_id": "xxx.apps.googleusercontent.com",
+    "project_id": "quickstart-xxx",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "xxx",
+    "redirect_uris": [
+      "urn:ietf:wg:oauth:2.0:oob",
+      "http://localhost"
+    ]
+  }
+}
+
+
+### STEP 2: set up token, where the api body is the token
+### if it is the first time, you don't have token, please go to step 3 & 4 instead of this step 
+POST http://localhost:9999/setup/token
+content-type: application/json
+
+{
+  "access_token": "xxx",
+  "refresh_token": "xxx",
+  "scope": "https://www.googleapis.com/auth/gmail.readonly",
+  "token_type": "Bearer",
+  "expiry_date": 111
+}
+
+
+### STEP 3: authorize your client with your sepcified scopes
+### you will receive auth URL and click on it to get token code
+POST http://localhost:9999/setup/authorize
+content-type: application/json
+
+{
+  "scopes": [
+    "https://www.googleapis.com/auth/gmail.readonly"
+  ]
+}
+
+
+### STEP 4: generate token with token code (from step 2)
+POST http://localhost:9999/setup/generatetoken
+content-type: application/json
+
+{
+  "code": "xxx"
+}
+
+
+### STEP 5: you can get one email by GET method
+### timeout unit is second, and default is 30 seconeds
+### and put your search query, otherwise it return the latest email
+GET  http://localhost:9999/email?timeout=5&search=to:someone@gmail.com
+
+
+### STEP 5: you can get one email by POST method
+### timeout unit is second, and default is 30 seconeds
+### and put your search query, otherwise it return the latest email
+POST http://localhost:9999/email/query
+content-type: application/json
+
+{
+    "timeout": 5,
+    "search": "to:someone@gmail.com"
+}

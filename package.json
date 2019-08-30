@@ -1,0 +1,19 @@
+{
+  "name": "gmailservice",
+  "version": "1.0.0",
+  "description": "Get Email from Gmail box",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node email.spec.js"
+  },
+  "keywords": [
+    "gmail"
+  ],
+  "author": "myuzhang",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "googleapis": "^42.0.0"
+  }
+}
