@@ -13,7 +13,7 @@
   "author": "myuzhang",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "googleapis": "^42.0.0"
   }
 }
